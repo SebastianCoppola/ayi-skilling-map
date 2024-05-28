@@ -4,6 +4,14 @@ import { ArrowDownward, Edit } from '@mui/icons-material'
 
 const Curso = ({ curso, handleEditarCurso }) => {
 
+    const handleChipColor = (idEstado) => {
+        switch(idEstado){
+            case 1: return 'green'
+            case 2: return 'orange'
+            default: return 'grey'
+        }
+    }
+
     return (
                 
         <Accordion 
@@ -23,7 +31,7 @@ const Curso = ({ curso, handleEditarCurso }) => {
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Typography sx={{border:'1px solid green', borderRadius:'5px', padding:'3px 7px', color:'green'}}>
+                        <Typography sx={{border:`1px solid ${handleChipColor(curso.estadoGeneralId)}`, borderRadius:'5px', padding:'3px 7px', color:`${handleChipColor(curso.estadoGeneralId)}`}}>
                             {curso.estadoGeneral}
                         </Typography>
                     </Grid>
@@ -90,8 +98,8 @@ const Curso = ({ curso, handleEditarCurso }) => {
                                 Urls/Repositorio: {!curso.repositorio && '-'}
                             </Typography>
                             <Grid container>
-                                {curso.repositorio?.map(it => (
-                                    <Grid item xs={12}>
+                                {curso.repositorio?.map((it, index) => (
+                                    <Grid item xs={12} key={index}>
                                         <Typography 
                                             onClick={()=>window.open(it, '_blank')}
                                             sx={{

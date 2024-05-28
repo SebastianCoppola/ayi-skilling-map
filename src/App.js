@@ -1,23 +1,20 @@
+import { useEffect } from 'react'
 //Mui:
 import { Grid } from '@mui/material'
 //Components:
-import Home from './components/Home/Home'
 import MapaTalento from './components/MapaTalento/MapaTalento'
 import Cursos from './components/Cursos/Cursos'
 import NavDrawer from './components/NavDrawer/NavDrawer'
 //Router:
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 //Data:
 import usuarios from './data/usuarios'
 
 function App() {
 
+	const navigate = useNavigate()
+
 	const rutas = [
-		{
-			title: 'home',
-			path: '/',
-			element: <Home />
-		},
 		{
 			title: 'mapa de talento',
 			path: '/mapa-de-talento',
@@ -31,6 +28,10 @@ function App() {
 	]
 
 	const user = usuarios[0]
+
+	useEffect(()=>{
+		navigate(rutas[0].path)
+	},[])
 
 	return (
 		<Grid container>

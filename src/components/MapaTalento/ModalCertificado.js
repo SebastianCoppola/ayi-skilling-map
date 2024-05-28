@@ -35,7 +35,7 @@ const ModalCertificado = ({ open, handleClose, data, changeCertificado }) => {
                         variant='standard'
                         InputLabelProps={{shrink: true}}
                         placeholder='Completar'
-                        value={certificado}
+                        value={certificado ?? ''}
                         onChange={(e)=> setCertificado(e.target.value)}
                     />
                 </Grid>

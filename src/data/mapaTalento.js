@@ -15,14 +15,18 @@ export const infoPersonal = {
             idValor: 1,
             valor: 'Inglés',
             idNivel: 2,
+            nivel: 'Intermedio',
             idExperiencia: 5,
+            experiencia: 'Más de 5 años',
             certificado: 'https://drive.google.com/file/u/1/d/1DsJvDFCTgsF7jtcTiThlAWQN9bwNQuQ5/view?usp=sharing'
         },
         {
             idValor: 2,
             valor:'Portugués',
             idNivel: 1,
+            nivel: 'Inicial',
             idExperiencia: 1,
+            experiencia: '0 - 6 meses',
             certificado: null
         }
     ],
@@ -31,14 +35,18 @@ export const infoPersonal = {
             idValor: 1,
             valor:'Scrum',
             idNivel: 2,
+            nivel:'Intermedio',
             idExperiencia: 5,
+            experiencia:'Más de 5 años',
             certificado: 'https://drive.google.com/file/u/1/d/1DsJvDFCTgsF7jtcTiThlAWQN9bwNQuQ5/view?usp=sharing'
         },
         {
             idValor: 2,
             valor:'Kanban',
             idNivel: 1,
+            nivel:'Inicial',
             idExperiencia: 1,
+            experiencia:'0 - 6 meses',
             certificado: null
         }
     ],
@@ -47,14 +55,18 @@ export const infoPersonal = {
             idValor: 1,
             valor: 'WINDOWS',
             idNivel: 2,
+            nivel:'Intermedio',
             idExperiencia: 5,
+            experiencia:'Más de 5 años',
             certificado: 'https://drive.google.com/file/u/1/d/1DsJvDFCTgsF7jtcTiThlAWQN9bwNQuQ5/view?usp=sharing'
         },
         {
             idValor: 2,
             valor: 'RED HATS',
             idNivel: 1,
+            nivel:'Inicial',
             idExperiencia: 1,
+            experiencia:'0 - 6 meses',
             certificado: null
         }
     ],
@@ -63,21 +75,27 @@ export const infoPersonal = {
             idValor: 1,
             valor: 'TYPESCRIPT',
             idNivel: 2,
+            nivel:'Intermedio',
             idExperiencia: 5,
+            experiencia:'Más de 5 años',
             certificado: 'https://drive.google.com/file/u/1/d/1DsJvDFCTgsF7jtcTiThlAWQN9bwNQuQ5/view?usp=sharing'
         },
         {
             idValor: 15,
             valor: 'PYTHON',
             idNivel: 1,
+            nivel:'Inicial',
             idExperiencia: 1,
+            experiencia:'0 - 6 meses',
             certificado: null
         },
         {
             idValor: 10,
             valor: 'NODE',
             idNivel: 1,
+            nivel:'Inicial',
             idExperiencia: 1,
+            experiencia:'0 - 6 meses',
             certificado: null
         }
     ]

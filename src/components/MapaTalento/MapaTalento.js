@@ -11,6 +11,7 @@ import { nivel, englishLevel, experiencia, idiomas, metodologiasAgiles,
 //Components:
 import CardBox from "./CardBox"
 import TalentCard from "./TalentCard"
+import jsPDF from "jspdf"
 
 const MapaTalento = () => {
 
@@ -31,6 +32,105 @@ const MapaTalento = () => {
         {title: 'Sistemas Operativos y Servidores', ref: sistemasOperativosRef},
         {title: 'Lenguajes/Frameworks', ref: lenguajesFrameworksRef}
     ]
+
+    const handleDescargarPdf = () => {
+        const doc = new jsPDF()
+        const pageHeight = doc.internal.pageSize.height
+        const pageWidth = doc.internal.pageSize.width
+        const marginTop = 20
+        const marginLeft = 10
+        const marginBottom = 20
+        const lineHeight = 8
+        let cursorX = marginLeft
+        let cursorY = marginTop
+        let currentPage = 1
+
+        const addPageNumber = (pageNum) => {
+            doc.setFontSize(10)
+            doc.text(`Page ${pageNum}`, pageWidth / 2, pageHeight - 10, { align: 'center' })
+        }
+
+        //Foto de perfil:
+        doc.addImage(fotoPerfil, 'JPG', cursorX, cursorY, 50, 50)
+        cursorX += 60 
+        //InfoPersonal:
+        doc.setFontSize(14)
+        doc.text(infoPersonal.nombre, cursorX, cursorY)
+        doc.setFontSize(12)
+        cursorY += 10
+        doc.text(`Legajo: ${infoPersonal.legajo}`, cursorX, cursorY)
+        cursorY += 10
+        doc.text(`Fecha de Ingreso: ${infoPersonal.fechaIngreso}`, cursorX, cursorY)
+        cursorY += 10
+        doc.text(`Puesto: ${infoPersonal.puesto}`, cursorX, cursorY)
+        cursorY += 10
+        doc.text(`Seniority: ${infoPersonal.seniority}`, cursorX, cursorY)
+        cursorY += 10
+        if (infoPersonal.cv) {
+            doc.textWithLink('Curriculum Vitae', cursorX, cursorY, { url: infoPersonal.cv })
+        }
+        cursorY += 25
+        //Maximo nivel de estudios:
+        cursorX = marginLeft
+        doc.setFontSize(16)
+        doc.text('Estudio Máximo:', cursorX, cursorY)
+        doc.line(cursorX, cursorY + 2, pageWidth - marginLeft, cursorY + 2)
+        cursorY += 15
+        doc.setFontSize(12)
+        doc.text(`Nivel: ${infoPersonal.estudioMaximo.nivel}`, cursorX, cursorY)
+        cursorY += 10
+        doc.text(`Título: ${infoPersonal.estudioMaximo.titulo}`, cursorX, cursorY)
+        cursorY += 10
+        if (infoPersonal.estudioMaximo.certificado) {
+            doc.textWithLink('Certificado', cursorX, cursorY, { url: infoPersonal.estudioMaximo.certificado })
+            
+        }else{
+            doc.text(`Sin certificado`, cursorX, cursorY)
+        }
+        
+        const drawSection = (title, items) => {
+            cursorY += 25
+            //Salto de pagina
+            if (cursorY + lineHeight * 6 > pageHeight - marginBottom) {
+                doc.addPage()
+                currentPage++
+                addPageNumber(currentPage)
+                cursorY = marginTop
+            }
+            //Section Title:
+            doc.setFontSize(16)
+            doc.text(title, cursorX, cursorY)
+            doc.line(cursorX, cursorY + 2, pageWidth - marginLeft, cursorY + 2)
+            cursorY += 15
+            //Section Body:
+            items.forEach(item => {
+                doc.setFontSize(14)
+                doc.text(`${item.valor}`, cursorX, cursorY)
+                cursorY += 7
+                doc.setFontSize(12)
+                doc.text(`Nivel: ${item.nivel}`, cursorX, cursorY)
+                cursorX += 50
+                doc.text(`Experiencia: ${item.experiencia}`, cursorX, cursorY)
+                cursorX += 70
+                if (item.certificado) {
+                    doc.textWithLink('Certificado', cursorX, cursorY, { url: item.certificado })
+                }else{
+                    doc.text('Sin certificado', cursorX, cursorY)
+                }
+                cursorX -= 120
+                cursorY += 15
+            })
+        }
+
+        addPageNumber(currentPage)
+
+        drawSection('Idiomas', infoPersonal.idiomas)
+        drawSection('Metodologías Ágiles', infoPersonal.metodologiasAgiles)
+        drawSection('Sistemas Operativos/Servidores', infoPersonal.sistemasOperativosServidores)
+        drawSection('Lenguajes/Frameworks', infoPersonal.lenguajesFrameworks)
+
+        doc.save('infoPersonal.pdf')
+    }
    
     return (
         <Grid container justifyContent='center' sx={{padding:'0 0 20px 0'}}>
@@ -78,7 +178,7 @@ const MapaTalento = () => {
                 <Button
                     variant='outlined'
                     sx={{color:'#8E8E8E', border:'1px solid #8E8E8E', ':hover':{border:'1px solid #8E8E8E'}}}
-                    onClick={()=>console.log('descargar pdf')}
+                    onClick={handleDescargarPdf}
                 >Descargar PDF</Button>
             </Grid>
 
@@ -104,7 +204,7 @@ const MapaTalento = () => {
                                 variant='standard'
                                 InputLabelProps={{shrink: true}}
                                 placeholder='Completar'
-                                value={personalInfo.nombre}
+                                value={personalInfo.nombre ?? ''}
                                 onChange={(e)=> setPersonalInfo({...personalInfo, nombre: e.target.value})}
                                 disabled={disableEdition}
                             />
@@ -116,7 +216,7 @@ const MapaTalento = () => {
                                 variant='standard'
                                 InputLabelProps={{shrink: true}}
                                 placeholder='Completar'
-                                value={personalInfo.legajo}
+                                value={personalInfo.legajo ?? ''}
                                 onChange={(e)=> setPersonalInfo({...personalInfo, legajo: e.target.value})}
                                 disabled={disableEdition}
                             />
@@ -128,7 +228,7 @@ const MapaTalento = () => {
                                 fullWidth
                                 variant='standard'
                                 InputLabelProps={{shrink: true}}
-                                value={personalInfo.fechaIngreso}
+                                value={personalInfo.fechaIngreso ?? ''}
                                 onChange={(e)=> setPersonalInfo({...personalInfo, fechaIngreso: e.target.value})}
                                 disabled={disableEdition}
                             />
@@ -139,7 +239,7 @@ const MapaTalento = () => {
                                 fullWidth
                                 variant='standard'
                                 InputLabelProps={{shrink: true}}
-                                value={personalInfo.puesto}
+                                value={personalInfo.puesto ?? ''}
                                 onChange={(e)=> setPersonalInfo({...personalInfo, puesto: e.target.value})}
                                 disabled={disableEdition}
                             />
@@ -151,7 +251,7 @@ const MapaTalento = () => {
                                 variant='standard'
                                 InputLabelProps={{shrink: true}}
                                 placeholder='Completar'
-                                value={personalInfo.seniority}
+                                value={personalInfo.seniority ?? ''}
                                 onChange={(e)=> setPersonalInfo({...personalInfo, seniority: e.target.value})}
                                 disabled={disableEdition}
                             />
@@ -166,7 +266,7 @@ const MapaTalento = () => {
                                 variant='standard'
                                 placeholder='Completar'
                                 InputLabelProps={{shrink: true}}
-                                value={personalInfo.estudioMaximo.nivel}
+                                value={personalInfo.estudioMaximo.nivel ?? ''}
                                 onChange={(e)=> 
                                     setPersonalInfo({
                                         ...personalInfo, 
@@ -185,7 +285,7 @@ const MapaTalento = () => {
                                     variant='standard'
                                     placeholder='Completar'
                                     InputLabelProps={{shrink: true}}
-                                    value={personalInfo.estudioMaximo.titulo}
+                                    value={personalInfo.estudioMaximo.titulo ?? ''}
                                     onChange={(e)=> 
                                         setPersonalInfo({
                                             ...personalInfo, 
@@ -204,7 +304,7 @@ const MapaTalento = () => {
                                 variant='standard'
                                 placeholder='Completar'
                                 InputLabelProps={{shrink: true}}
-                                value={personalInfo.estudioMaximo.certificado}
+                                value={personalInfo.estudioMaximo.certificado ?? ''}
                                 onChange={(e)=> 
                                     setPersonalInfo({
                                         ...personalInfo, 
@@ -237,7 +337,7 @@ const MapaTalento = () => {
                                 variant='standard'
                                 placeholder='Completar'
                                 InputLabelProps={{shrink: true}}
-                                value={personalInfo.estudioMaximo.certificado}
+                                value={personalInfo.estudioMaximo.certificado ?? ''}
                                 onChange={(e)=> 
                                     setPersonalInfo({
                                         ...personalInfo, 
@@ -306,7 +406,7 @@ const MapaTalento = () => {
                 />
             </CardBox>
 
-            {/* </div> */}
+            {/* Lenguajes y Frameworks */}
             <CardBox>
                 <span ref={lenguajesFrameworksRef}/>
                 <TalentCard 

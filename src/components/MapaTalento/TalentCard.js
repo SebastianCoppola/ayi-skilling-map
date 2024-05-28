@@ -46,8 +46,9 @@ const TalentCard = (props) => {
                                     }))}
                                 >
                                     <MenuItem value={0}><em>Seleccione</em></MenuItem>
-                                    {col1.options?.map(it=>(
+                                    {col1.options?.map((it, index)=>(
                                         <MenuItem 
+                                            key={index}
                                             value={it.id}
                                             disabled={data.some(ut => ut.idValor === it.id)}
                                         >{it.descripcion}</MenuItem>
@@ -67,7 +68,7 @@ const TalentCard = (props) => {
                                 >
                                     <MenuItem value={0}><em>Seleccione</em></MenuItem>
                                     {col2.options?.map(it=>(
-                                        <MenuItem value={it.id}>{it.descripcion}</MenuItem>
+                                        <MenuItem key={it.id} value={it.id}>{it.descripcion}</MenuItem>
                                     ))}
                                 </Select>
                             </Grid>
@@ -84,7 +85,7 @@ const TalentCard = (props) => {
                                 >
                                     <MenuItem value={0}><em>Seleccione</em></MenuItem>
                                     {col3.options?.map(it=>(
-                                        <MenuItem value={it.id}>{it.descripcion}</MenuItem>
+                                        <MenuItem key={it.id} value={it.id}>{it.descripcion}</MenuItem>
                                     ))}
                                 </Select>
                             </Grid>

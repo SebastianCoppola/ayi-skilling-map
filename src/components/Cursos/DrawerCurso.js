@@ -66,7 +66,7 @@ const DrawerRight = (props) => {
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     placeholder='Completar'
-                                    value={curso?.curso}
+                                    value={curso?.curso ?? ''}
                                     onChange={(e)=> setCurso({...curso, curso: e.target.value})}
                                 />
                             </Grid>
@@ -92,7 +92,7 @@ const DrawerRight = (props) => {
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     placeholder='Completar'
-                                    value={curso?.deadlineTeorico}
+                                    value={curso?.deadlineTeorico ?? ''}
                                     onChange={(e)=> setCurso({...curso, deadlineTeorico: e.target.value})}
                                 />
                             </Grid>
@@ -103,7 +103,7 @@ const DrawerRight = (props) => {
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     placeholder='Completar'
-                                    value={curso?.duracionTeorico}
+                                    value={curso?.duracionTeorico ?? ''}
                                     onChange={(e)=> setCurso({...curso, duracionTeorico: e.target.value})}
                                 />
                             </Grid>
@@ -115,7 +115,7 @@ const DrawerRight = (props) => {
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     placeholder='Completar'
-                                    value={curso?.deadlinePractico}
+                                    value={curso?.deadlinePractico ?? ''}
                                     onChange={(e)=> setCurso({...curso, deadlinePractico: e.target.value})}
                                 />
                             </Grid>
@@ -126,7 +126,7 @@ const DrawerRight = (props) => {
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     placeholder='Completar'
-                                    value={curso?.duracionPractico}
+                                    value={curso?.duracionPractico ?? ''}
                                     onChange={(e)=> setCurso({...curso, duracionPractico: e.target.value})}
                                 />
                             </Grid>
@@ -137,7 +137,7 @@ const DrawerRight = (props) => {
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     placeholder='Completar'
-                                    value={curso?.referente}
+                                    value={curso?.referente ?? ''}
                                     onChange={(e)=> setCurso({...curso, referente: e.target.value})}
                                 />
                             </Grid>
@@ -149,7 +149,7 @@ const DrawerRight = (props) => {
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     placeholder='Completar'
-                                    value={curso?.planPractica}
+                                    value={curso?.planPractica ?? ''}
                                     onChange={(e)=> setCurso({...curso, planPractica: e.target.value})}
                                 />
                             </Grid>
@@ -160,7 +160,7 @@ const DrawerRight = (props) => {
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     placeholder='Agregar link de entrega'
-                                    value={newLink}
+                                    value={newLink ?? ''}
                                     onChange={(e)=> setNewLink(e.target.value)}
                                     InputProps={{
                                         endAdornment: (
@@ -212,7 +212,7 @@ const DrawerRight = (props) => {
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     placeholder='Completar'
-                                    value={curso?.certificado}
+                                    value={curso?.certificado ?? ''}
                                     onChange={(e)=> setCurso({...curso, certificado: e.target.value})}
                                 />
                             </Grid>
@@ -223,7 +223,7 @@ const DrawerRight = (props) => {
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     placeholder='Completar'
-                                    value={curso?.feedback}
+                                    value={curso?.feedback ?? ''}
                                     onChange={(e)=> setCurso({...curso, feedback: e.target.value})}
                                 />
                             </Grid>
